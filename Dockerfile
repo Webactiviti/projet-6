@@ -21,7 +21,7 @@ COPY . /app
 RUN uv pip install --system -e . || uv pip install --system -r requirements.txt || true
 
 # Import du modèle depuis le dossier copié vers le store BentoML du conteneur
-RUN uv run bentoml models import ./models/seattle_co2
+RUN uv run bentoml models import ./models/seattle_co2.bentoModel
 
 EXPOSE 3000
 
