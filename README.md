@@ -19,7 +19,7 @@
 projet_6/
 ├── AnalyseExploiratoire.ipynb  # Script d'analyse du fichier CSV 
 ├── analyse_ml.ipynb           # Script d'analyse ML
-├── docker-compose.yml          # Orchestration des conteneurs (MongoDB & Script Replicaset et Sharding)
+├── docker-compose.yml          # Orchestration des conteneurs 
 ├── Dockerfile                  # Configuration du conteneur 
 ├── service.py                  # Script service BenToML
 ├── bentofile.yaml              # Script 
