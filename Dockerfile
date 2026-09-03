@@ -23,4 +23,4 @@ RUN uv pip install --system -e . || uv pip install --system -r requirements.txt 
 EXPOSE 3000
 
 # Commande de démarrage BentoML
-CMD ["bentoml", "serve", ".", "--port", "3000"]
+CMD ["uv", "run" ,"bentoml", "serve", ".", "--port", "3000"]
