@@ -1,71 +1,26 @@
+FROM python:3.13-slim
 
-# ===========================================
-#
-# THIS IS A GENERATED DOCKERFILE. DO NOT EDIT
-#
-# ===========================================
+ENV PYTHONUNBUFFERED=1 \
+    PORT=3000
 
-# Block SETUP_BENTO_BASE_IMAGE
-FROM python:3.13-slim AS base-container
+WORKDIR /app
 
-ENV LANG=C.UTF-8
+# Installation des dépendances système
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-ENV LC_ALL=C.UTF-8
+# Installation de uv
+RUN pip install --no-cache-dir uv
 
-ENV PYTHONIOENCODING=UTF-8
+# Copie du projet
+COPY . /app
 
-ENV PYTHONUNBUFFERED=1
+# Installation des dépendances Python (s'adapte à pyproject.toml ou requirements.txt)
+RUN uv pip install --system -e . || uv pip install --system -r requirements.txt || true
 
-ARG BENTO_USER=bentoml
-ARG BENTO_USER_UID=1034
-ARG BENTO_USER_GID=1034
-RUN if command -v groupadd &>/dev/null; then \
-    groupadd -g $BENTO_USER_GID -o $BENTO_USER && useradd -m -u $BENTO_USER_UID -g $BENTO_USER_GID -o -r $BENTO_USER; \
-    else \
-    addgroup -g $BENTO_USER_GID -S $BENTO_USER && adduser -u $BENTO_USER_UID -G $BENTO_USER -S $BENTO_USER; \
-    fi
-
-
-ARG BENTO_PATH=/home/bentoml/bento
-ENV BENTO_PATH=$BENTO_PATH
-ENV BENTOML_HOME=/home/bentoml/
-ENV BENTOML_HF_CACHE_DIR=/home/bentoml/bento/hf-models
-ENV BENTOML_CONTAINERIZED=true
-
-
-RUN mkdir $BENTO_PATH && chown bentoml:bentoml $BENTO_PATH -R
-WORKDIR $BENTO_PATH
-
-COPY --chown=bentoml:bentoml ./env/docker ./env/docker/
-RUN apt-get update && apt-get install -q -y --no-install-recommends --allow-remove-essential ca-certificates gnupg2 bash build-essential git
-RUN command -v uv >/dev/null || pip install uv
-RUN UV_PYTHON_INSTALL_DIR=/app/python/ uv venv --python 3.13 /app/.venv && \
-    chown -R bentoml:bentoml /app/.venv
-ENV VIRTUAL_ENV=/app/.venv
-ENV UV_COMPILE_BYTECODE=1
-ENV UV_NO_PROGRESS=1
-ENV PATH=/app/.venv/bin:${PATH}
-
-COPY --chown=bentoml:bentoml ./env/python ./env/python/
-# install python packages
-RUN if [ -d ./src ]; \
-    then INSTALL_ROOT="./src"; \
-    else INSTALL_ROOT="./env/python"; \
-    fi; uv --directory $INSTALL_ROOT pip install -r $BENTO_PATH/env/python/requirements.txt
-
-
-COPY --chown=bentoml:bentoml . ./
-
-# Block SETUP_BENTO_ENTRYPOINT
-# Default port for BentoServer
 EXPOSE 3000
 
-# Expose Prometheus port
-EXPOSE 3001
-
-RUN chmod +x /home/bentoml/bento/env/docker/entrypoint.sh
-
-USER bentoml
-
-ENTRYPOINT [ "/home/bentoml/bento/env/docker/entrypoint.sh" ]
-
+# Commande de démarrage BentoML
+CMD ["bentoml", "serve", ".", "--port", "3000"]
