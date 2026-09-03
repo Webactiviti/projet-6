@@ -1,0 +1,17 @@
+name: seattle_co2
+version: kmdsdxfg5kbrcvnq
+module: bentoml.sklearn
+labels: {}
+options: {}
+metadata: {}
+context:
+  framework_name: sklearn
+  framework_versions:
+    scikit-learn: 1.9.0
+  bentoml_version: 1.4.39
+  python_version: 3.13.13
+signatures:
+  predict:
+    batchable: false
+api_version: v1
+creation_time: '2026-09-02T16:21:17.073238+00:00'

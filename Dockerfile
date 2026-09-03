@@ -20,6 +20,9 @@ COPY . /app
 # Installation des dépendances Python (s'adapte à pyproject.toml ou requirements.txt)
 RUN uv pip install --system -e . || uv pip install --system -r requirements.txt || true
 
+# Import du modèle depuis le dossier copié vers le store BentoML du conteneur
+RUN uv run bentoml models import ./models/seattle_co2
+
 EXPOSE 3000
 
 # Commande de démarrage BentoML
