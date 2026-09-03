@@ -1,0 +1,28 @@
+# Python-generated files
+
+main.py
+
+
+# ==========================================
+# Environnement virtuel & uv
+# ==========================================
+.venv/
+.uv/
+
+# ==========================================
+# Jupyter & Notebooks
+# ==========================================
+# Captures automatiques et métadonnées Jupyter
+.ipynb_checkpoints/
+
+
+
+# ==========================================
+# Python (artefacts & cache)
+# ==========================================
+__pycache__/
+
+
+# OS MAC
+.DS_Store
+Thumbs.db

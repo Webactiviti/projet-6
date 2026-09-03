@@ -1,0 +1,19 @@
+service: "service:SeattleBuildingService"
+
+
+labels:
+  owner: projet6
+  project: prédiction_emissions
+models:
+    - "seattle_co2:latest" # le nom du model
+python:
+  packages:
+    - numpy
+    - pandas
+    - scikit-learn
+    - pydantic
+include:
+  - "BuildingInput.py"
+  - "service.py"
+exclude:
+  - "README.md"

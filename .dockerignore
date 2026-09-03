@@ -1,0 +1,31 @@
+# --- Fichiers & Dossiers Jupyter & Autres fichiers ---
+*.ipynb
+.ipynb_checkpoints/
+README_2.md
+
+# --- Environnements virtuels & Python ---
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Fichiers Git & IDE suivant l'outil utilisé ---
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# --- Données volumineuses / temporaires ---
+data/
+*.csv
+*.json
+*.xlsx
+
+# --- Variables d'environnement / Secrets ---
+.env
+*.pem
+
+

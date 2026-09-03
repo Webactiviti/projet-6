@@ -1,0 +1,20 @@
+{
+  "input_data": {
+    "DataYear": 2016,
+    "BuildingAge": 55,
+    "BuildingType": "SPS-District K-12",
+    "PrimaryPropertyType": "K-12 School",
+    "LargestPropertyUseType": "K-12 School",
+    "Latitude": 47.54576,
+    "Longitude": -122.26853,
+    "NumberofBuildings": 1.0,
+    "PropertyGFATotal": 56228,
+    "PropertyGFAParking": 0,
+    "mean_GFA_per_floor": 18742.666666666668,
+    "Number_of_Use_Types": 1,
+    "ENERGYSTARScore": 95.0,
+    "ENERGYSTARScoreIsMissing": 0,
+    "Ratio_Electricity": 0.6086186356674146,
+    "Ratio_Steam": 0.0
+  }
+}
