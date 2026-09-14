@@ -11,6 +11,7 @@
 * Mise en service sur le cloud sur une base  Docker
 
 ## exemple de format du JSON 
+```text
 {
   "input_data": {
     "DataYear": 2016,
@@ -31,6 +32,29 @@
     "Ratio_Steam": 0.0
   }
 }
+```
+* liste des commandes bentoml
+
+uv run bentoml models list
+
+uv run bentoml  list
+
+* Construction du bentoml
+
+uv run bentoml build
+
+uv run bentoml containerize seattle_building_service
+
+* Lancement du site
+
+docker run --rm -p 3000:3000 seattle_building_service:(TAG)
+
+* autres commandes
+
+uv run bentoml  delete seattle_building_service:(TAG)
+
+uv run bentoml models  delete seattle_co2:(TAG)
+
 
 
 ## 📂 Structure du Répertoire
