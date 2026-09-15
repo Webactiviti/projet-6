@@ -42,7 +42,7 @@ uv run bentoml  list
 
  importer le model dans le projet
 
-uv run bentoml models export seattle_co2  ./models/seatle_co2
+uv run bentoml models export seattle_co2  ./models/seattle_co2
 
 
 
