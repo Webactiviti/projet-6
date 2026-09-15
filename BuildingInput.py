@@ -86,56 +86,21 @@ class BuildingInput(BaseModel):
         examples=[2],
     )
 
-    # SCORES & INDICATEURS DE DONNÉES MANQUANTES
-    ENERGYSTARScore: float = Field(
-        ...,
-        ge=0.0,
-        le=100.0,
-        description="Score Energy Star (0 à 100)",
-        examples=[75.0],
-    )
-    ENERGYSTARScoreIsMissing: Literal[0, 1] = Field(
-        ...,
-        description="Flag indiquant si le score était manquant à l'origine (0 ou 1)",
-        examples=[0],
-    )
 
-    # RATIOS ÉNERGÉTIQUES (0.0 à 1.0)
-    Ratio_Electricity: float = Field(
-        ...,
-        ge=0.0,
-        le=1.0,
-        description="Proportion d'électricité (entre 0 et 1)",
-        examples=[0.65],
-    )
-    Ratio_Steam: float = Field(
-        ...,
-        ge=0.0,
-        le=1.0,
-        description="Proportion de vapeur/gaz (entre 0 et 1)",
-        examples=[0.35],
-    )
+
+
 
     # VALIDATIONS LOGIQUES
     @model_validator(mode="after")
     def validate_surfaces_and_ratios(self) -> Self:
-        # 1. Cohérence géométrique
+        #  Cohérence géométrique
         if self.PropertyGFAParking >= self.PropertyGFATotal:
             raise ValueError(
                 f"La surface de parking ({self.PropertyGFAParking} sqft) "
                 f"ne peut pas dépasser la surface totale ({self.PropertyGFATotal} sqft)."
             )
 
-        # 2. Cohérence énergétique
-        total_ratio = self.Ratio_Electricity + self.Ratio_Steam
-        if total_ratio > 1.05:
-            raise ValueError(
-                f"La somme des ratios d'énergie ({total_ratio:.2f}) "
-                "ne peut pas être supérieure à 1.0."
-            )
-
         return self
-
 
     # CONFIGURATION JSON PAR DÉFAUT DANS SWAGGER UI :
     model_config = ConfigDict(
@@ -152,11 +117,7 @@ class BuildingInput(BaseModel):
                 "PropertyGFATotal": 56228,
                 "PropertyGFAParking": 0,
                 "mean_GFA_per_floor": 18742.66,
-                "Number_of_Use_Types": 1,
-                "ENERGYSTARScore": 95.0,
-                "ENERGYSTARScoreIsMissing": 0,
-                "Ratio_Electricity": 0.6086186356674146,
-                "Ratio_Steam": 0.0,
+                "Number_of_Use_Types": 1
             }
         }
     )

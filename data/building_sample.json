@@ -11,10 +11,6 @@
     "PropertyGFATotal": 56228,
     "PropertyGFAParking": 0,
     "mean_GFA_per_floor": 18742.666666666668,
-    "Number_of_Use_Types": 1,
-    "ENERGYSTARScore": 95.0,
-    "ENERGYSTARScoreIsMissing": 0,
-    "Ratio_Electricity": 0.6086186356674146,
-    "Ratio_Steam": 0.0
+    "Number_of_Use_Types": 1
   }
 }

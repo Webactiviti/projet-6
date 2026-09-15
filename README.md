@@ -26,14 +26,13 @@
     "PropertyGFAParking": 0,
     "mean_GFA_per_floor": 18742,
     "Number_of_Use_Types": 1,
-    "ENERGYSTARScore": 95.0,
-    "ENERGYSTARScoreIsMissing": 0,
-    "Ratio_Electricity": 0.6,
-    "Ratio_Steam": 0.0
+    "ENERGYSTARScoreIsMissing": 0
   }
 }
 ```
 * liste des commandes bentoml
+
+Affichage du bentoml et models
 
 uv run bentoml models list
 
@@ -41,21 +40,48 @@ uv run bentoml  list
 
 * Construction du bentoml
 
+ importer le model dans le projet
+
+uv run bentoml models export seattle_co2  ./models/seatle_co2
+
+
+
 uv run bentoml build
+
+
 
 uv run bentoml containerize seattle_building_service
 
-* Lancement du site
+et ensuite 
 
 docker run --rm -p 3000:3000 seattle_building_service:(TAG)
 
+Lancer BenToML en local
+
+uv run bentoml serve service:SeattleBuildingService --reload
+
+
 * autres commandes
+
+Respecter l'ordre des commandes  si vous voulez supprimer
 
 uv run bentoml  delete seattle_building_service:(TAG)
 
 uv run bentoml models  delete seattle_co2:(TAG)
 
+* ordre d'utilisation des notebooks
 
+AnalyseExploiratoire.ipynb
+
+analyse_ml.ipynb
+
+bentoml_prediction.ipynb ( créer le bentoml avant l'utilisation')
+
+* afficher le ou les docker et supression
+
+sudo docker images "seattle_building_service"
+
+sudo docker rmi -f $(docker images "seattle_building_service" )
 
 ## 📂 Structure du Répertoire
 
