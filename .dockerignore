@@ -1,7 +1,7 @@
 # --- Fichiers & Dossiers Jupyter & Autres fichiers ---
 *.ipynb
 .ipynb_checkpoints/
-README_2.md
+
 
 # --- Environnements virtuels & Python ---
 .venv/
