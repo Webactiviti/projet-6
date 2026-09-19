@@ -27,7 +27,15 @@ class SeattleBuildingService:
         # Prédiction (modèle entraîné en log1p)
         pred_log = self.model.predict(df_input)
 
+        pred_real = np.expm1(pred_log)
+        
         # Reconversion réelle
-        predictions = float(np.expm1(pred_log)[0])
+        co2_pred = float(pred_real[0][0])
+        energy_pred = float(pred_real[0][1])
+       
 
-        return {"prediction_tCO2": round(predictions, 2)}
+
+        return {
+            "prediction_tCO2": round(co2_pred, 2),
+            "prediction_SiteEnergyUse_kBtu": round(energy_pred, 2)
+}

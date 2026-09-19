@@ -117,7 +117,8 @@ class BuildingInput(BaseModel):
                 "PropertyGFATotal": 56228,
                 "PropertyGFAParking": 0,
                 "mean_GFA_per_floor": 18742.66,
-                "Number_of_Use_Types": 1
+                "Number_of_Use_Types": 1,
+                "SiteEnergyUse(kBtu)" : 7226362.5 
             }
         }
     )
